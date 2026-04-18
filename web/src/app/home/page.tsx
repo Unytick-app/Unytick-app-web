@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 
 const actividadReciente = [
@@ -99,13 +98,12 @@ function IconoCaja() {
 }
 
 export default function HomePage() {
-    const router = useRouter();
   return (
     <div className="min-h-screen bg-[#060b19] text-[#e9efff]">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(140,183,255,0.18),transparent_35%),radial-gradient(circle_at_90%_20%,rgba(144,255,216,0.12),transparent_32%),radial-gradient(circle_at_70%_80%,rgba(140,183,255,0.12),transparent_36%),linear-gradient(180deg,#040811_0%,#060b19_48%,#050912_100%)]" />
-      <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:46px_46px] opacity-35" />
+      <div className="grid-drift pointer-events-none fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[46px_46px] opacity-35" />
 
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-white/10 bg-white/[0.03] p-5 backdrop-blur-2xl lg:flex lg:flex-col">
+      <aside className="reveal reveal-1 fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-white/10 bg-white/3 p-5 backdrop-blur-2xl lg:flex lg:flex-col">
         <div className="mb-7">
           <h1 className="text-2xl font-semibold tracking-tight text-[#b7f7d8]">
             CampusBistro
@@ -115,7 +113,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+        <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
           <p className="text-sm font-medium text-[#ecf4ff]">
             Comedor Principal
           </p>
@@ -129,42 +127,42 @@ export default function HomePage() {
         <nav className="mt-8 space-y-1 text-sm text-white/70">
           <Link
             href="/home"
-            className="flex items-center gap-3 rounded-xl border border-white/14 bg-white/[0.06] px-3 py-2.5 text-[#c8ffe5]"
+            className="flex items-center gap-3 rounded-xl border border-white/14 bg-white/6 px-3 py-2.5 text-[#c8ffe5]"
           >
             <IconoPanel />
             <span>Inicio</span>
           </Link>
-          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/[0.05]">
+          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/5">
             <IconoLista />
             <span>Venta rapida</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/[0.05]">
+          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/5">
             <IconoTicket />
             <span>Tickets</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/[0.05]">
+          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/5">
             <IconoReloj />
             <span>Actividad</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/[0.05]">
+          <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/5">
             <IconoCaja />
             <span>Inventario</span>
           </button>
         </nav>
 
         <div className="mt-auto space-y-2 text-sm text-white/68">
-          <button className="w-full rounded-lg px-3 py-2 text-left transition hover:bg-white/[0.05]">
+          <button className="w-full rounded-lg px-3 py-2 text-left transition hover:bg-white/5">
             Soporte
           </button>
          
-          <Link href="/" className="w-full rounded-lg px-3 py-2 text-left text-[#ffc4c4] transition hover:bg-white/[0.05]" >
+          <Link href="/" className="w-full rounded-lg px-3 py-2 text-left text-[#ffc4c4] transition hover:bg-white/5" >
             Cerrar sesion
           </Link>
         </div>
       </aside>
 
       <main className="relative z-10 min-h-screen lg:pl-64">
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-black/20 px-4 py-4 backdrop-blur-2xl md:px-8">
+        <header className="reveal reveal-2 sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-black/20 px-4 py-4 backdrop-blur-2xl md:px-8">
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-1.5 md:flex">
               <span className="size-2.5 rounded-full bg-[#ff5f57]" />
@@ -181,7 +179,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hidden w-full max-w-md items-center gap-3 rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2 text-sm text-white/50 md:flex">
+          <div className="hidden w-full max-w-md items-center gap-3 rounded-xl border border-white/12 bg-white/4 px-3 py-2 text-sm text-white/50 md:flex">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -206,7 +204,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden rounded-full border border-white/14 bg-white/[0.05] px-3 py-1 text-xs font-medium text-[#d7f8e8] sm:inline-block">
+            <span className="hidden rounded-full border border-white/14 bg-white/5 px-3 py-1 text-xs font-medium text-[#d7f8e8] sm:inline-block">
               Sesion activa Operador #42
             </span>
             <div className="size-9 rounded-full border border-white/20 bg-linear-to-br from-[#6ea5dc]/55 to-[#7de0af]/40 backdrop-blur" />
@@ -214,19 +212,19 @@ export default function HomePage() {
         </header>
 
         <section className="px-4 pb-8 pt-7 md:px-8">
-          <p className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-[#bde9d2] backdrop-blur-xl">
+          <p className="reveal reveal-3 inline-flex items-center rounded-full border border-white/15 bg-white/4 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-[#bde9d2] backdrop-blur-xl">
             Sede Monteria - Comedor Central
           </p>
 
-          <h1 className="mt-3 text-4xl font-semibold leading-tight text-[#edf3ff] md:text-5xl">
+          <h1 className="reveal reveal-4 mt-3 text-4xl font-semibold leading-tight text-[#edf3ff] md:text-5xl">
             Bienvenido, <span className="text-[#9ce9c7]">Operador</span>
           </h1>
-          <p className="mt-2 max-w-2xl text-base text-white/67">
+          <p className="reveal reveal-5 mt-2 max-w-2xl text-base text-white/67">
             La cocina esta en marcha y los tickets listos para ser atendidos.
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 xl:grid-cols-3">
-            <article className="group rounded-3xl border border-white/12 bg-white/[0.045] p-6 backdrop-blur-2xl transition duration-300 hover:bg-white/[0.06] xl:col-span-2">
+            <article className="reveal reveal-6 group rounded-3xl border border-white/12 bg-white/4.5 p-6 backdrop-blur-2xl transition duration-300 hover:bg-white/6 xl:col-span-2">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="text-2xl font-medium">
@@ -268,8 +266,8 @@ export default function HomePage() {
               </div>
             </article>
 
-            <article className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.05] p-6 backdrop-blur-2xl transition duration-300 hover:bg-white/[0.065]">
-              <div className="pointer-events-none absolute -right-10 -top-16 size-36 rounded-full bg-[#a5efcf]/25 blur-3xl" />
+            <article className="reveal reveal-7 relative overflow-hidden rounded-3xl border border-white/12 bg-white/5 p-6 backdrop-blur-2xl transition duration-300 hover:bg-white/6.5">
+              <div className="ambient-float pointer-events-none absolute -right-10 -top-16 size-36 rounded-full bg-[#a5efcf]/25 blur-3xl" />
               <div className="relative">
                 <div className="mb-6 inline-flex size-12 items-center justify-center rounded-2xl border border-white/20 bg-white/[0.07]">
                   <IconoCaja />
@@ -290,10 +288,10 @@ export default function HomePage() {
           </div>
 
           <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-            <article className="rounded-3xl border border-white/12 bg-white/[0.045] p-5 backdrop-blur-2xl lg:col-span-2">
+            <article className="reveal reveal-8 rounded-3xl border border-white/12 bg-white/4.5 p-5 backdrop-blur-2xl lg:col-span-2">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-2xl font-medium">Actividad reciente</h3>
-                <button className="rounded-full border border-white/16 px-3 py-1 text-xs font-medium uppercase tracking-wider text-[#c3f6df] transition hover:bg-white/[0.08]">
+                <button className="rounded-full border border-white/16 px-3 py-1 text-xs font-medium uppercase tracking-wider text-[#c3f6df] transition hover:bg-white/8">
                   Ver todos
                 </button>
               </div>
@@ -332,8 +330,8 @@ export default function HomePage() {
               </div>
             </article>
 
-            <div className="space-y-4">
-              <article className="rounded-3xl border border-white/12 bg-white/[0.045] p-5 backdrop-blur-2xl">
+            <div className="reveal reveal-9 space-y-4">
+              <article className="rounded-3xl border border-white/12 bg-white/4.5 p-5 backdrop-blur-2xl">
                 <h3 className="text-xl font-medium">Ventana de servicio</h3>
                 <div className="mt-4 space-y-4 text-sm">
                   <div className="flex items-center justify-between">
@@ -353,7 +351,7 @@ export default function HomePage() {
                 </div>
               </article>
 
-              <article className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.045] p-5 backdrop-blur-2xl">
+              <article className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/4.5 p-5 backdrop-blur-2xl">
                 <div className="absolute inset-x-0 bottom-0 h-14 bg-linear-to-t from-[#9de9cb]/14 to-transparent" />
                 <div className="relative">
                   <h4 className="text-lg font-medium">Mantener estandares</h4>
@@ -366,6 +364,102 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      <style jsx global>{`
+        @keyframes softRevealUp {
+          from {
+            opacity: 0;
+            transform: translateY(14px) scale(0.985);
+            filter: blur(6px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes ambientFloat {
+          0%,
+          100% {
+            transform: translate3d(0, 0, 0);
+          }
+          50% {
+            transform: translate3d(0, -10px, 0);
+          }
+        }
+
+        @keyframes driftGrid {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(16px, 16px, 0);
+          }
+        }
+
+        .reveal {
+          opacity: 0;
+          animation: softRevealUp 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          will-change: transform, opacity, filter;
+        }
+
+        .reveal-1 {
+          animation-delay: 40ms;
+        }
+
+        .reveal-2 {
+          animation-delay: 100ms;
+        }
+
+        .reveal-3 {
+          animation-delay: 160ms;
+        }
+
+        .reveal-4 {
+          animation-delay: 220ms;
+        }
+
+        .reveal-5 {
+          animation-delay: 280ms;
+        }
+
+        .reveal-6 {
+          animation-delay: 340ms;
+        }
+
+        .reveal-7 {
+          animation-delay: 400ms;
+        }
+
+        .reveal-8 {
+          animation-delay: 460ms;
+        }
+
+        .reveal-9 {
+          animation-delay: 520ms;
+        }
+
+        .ambient-float {
+          animation: ambientFloat 7.2s ease-in-out infinite;
+        }
+
+        .grid-drift {
+          animation: driftGrid 20s linear infinite alternate;
+          will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .reveal,
+          .ambient-float,
+          .grid-drift {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
