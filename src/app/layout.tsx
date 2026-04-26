@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import GlobalContextProvider from "@/context/GlobalContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <GlobalContextProvider>
+        {children}
+        </GlobalContextProvider>
+        
+        </body>
     </html>
   );
 }

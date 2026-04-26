@@ -1,5 +1,7 @@
 "use client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 
 const actividadReciente = [
@@ -98,6 +100,10 @@ function IconoCaja() {
 }
 
 export default function HomePage() {
+   const { data: session, status} = useSession()
+   console.log("Session data:", session);
+   console.log("Session status:", status);
+
   return (
     <div className="min-h-screen bg-[#060b19] text-[#e9efff]">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(140,183,255,0.18),transparent_35%),radial-gradient(circle_at_90%_20%,rgba(144,255,216,0.12),transparent_32%),radial-gradient(circle_at_70%_80%,rgba(140,183,255,0.12),transparent_36%),linear-gradient(180deg,#040811_0%,#060b19_48%,#050912_100%)]" />
@@ -204,9 +210,12 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="hidden rounded-full border border-white/14 bg-white/5 px-3 py-1 text-xs font-medium text-[#d7f8e8] sm:inline-block">
-              Sesion activa Operador #42
-            </span>
+            <button onClick={()=>{
+              signOut()
+              redirect("/")
+            }} className="hidden rounded-full border border-white/14 bg-white/5 px-3 py-1 text-xs font-medium text-[#d7f8e8] sm:inline-block">
+              Sesion activa {session?.user?.name || "Usuario"}
+            </button>
             <div className="size-9 rounded-full border border-white/20 bg-linear-to-br from-[#6ea5dc]/55 to-[#7de0af]/40 backdrop-blur" />
           </div>
         </header>

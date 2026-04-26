@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ModalLogin from "@/components/ModalLogin";
+import { createUserAction, loginAction } from "@/actions/login.action";
+import { createUser } from "@/services/auth.service";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -47,6 +49,15 @@ export default function LoginForm() {
     <>
       <div className="w-1/2 bg-linear-to-b from-white/5 to-white/2 rounded-r-2xl p-10 flex flex-col justify-center">
         {/* Header */}
+        {/* <form action={createUserAction}>
+
+        <button
+          type="submit"
+          className="text-[#7ECDA7] hover:text-[#1f8856] transition mb-4"
+        >
+          crear cuenta
+        </button>
+        </form> */}
         <div className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-2">
             Inicio de Sesión
@@ -57,7 +68,7 @@ export default function LoginForm() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form action={loginAction} className="space-y-6">
           {/* Email/Usuario */}
           <div>
             <label className="block text-xs font-semibold text-white/70 mb-3 tracking-wider">
@@ -67,6 +78,7 @@ export default function LoginForm() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              name="correo"
               placeholder="usuario"
               className="w-full bg-black/25 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#7ECDA7] focus:bg-white/10 transition"
               required
@@ -82,6 +94,7 @@ export default function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              name="clave"
               placeholder="••••••••••"
               className="w-full bg-black/25 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#7ECDA7] focus:bg-white/10 transition"
               required
@@ -111,7 +124,9 @@ export default function LoginForm() {
             disabled={isLoading}
             className="w-full bg-linear-to-r from-[#7FD3AA] to-[#056C4B] hover:from-[#056C4B] hover:to-[#002016] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition duration-400 flex items-center justify-center gap-2 mt-8"
           >
-            <span>{isLoading ? "Validando acceso..." : "Ingresar al Sistema"}</span>
+            <span>
+              {isLoading ? "Validando acceso..." : "Ingresar al Sistema"}
+            </span>
             <svg
               className="w-5 h-5"
               fill="none"
@@ -127,7 +142,9 @@ export default function LoginForm() {
             </svg>
           </button>
 
-          {authError ? <p className="text-sm text-red-300 mt-3">{authError}</p> : null}
+          {authError ? (
+            <p className="text-sm text-red-300 mt-3">{authError}</p>
+          ) : null}
         </form>
       </div>
 
