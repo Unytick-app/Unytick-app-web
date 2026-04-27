@@ -1,8 +1,8 @@
 "use client";
+import { createUser } from "@/services/auth.service";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-
+import { redirect, useRouter } from "next/navigation";
 
 const actividadReciente = [
   {
@@ -100,9 +100,10 @@ function IconoCaja() {
 }
 
 export default function HomePage() {
-   const { data: session, status} = useSession()
-   console.log("Session data:", session);
-   console.log("Session status:", status);
+  const { data: session, status } = useSession();
+  console.log("Session data:", session);
+  console.log("Session status:", status);
+  const router = useRouter()
 
   return (
     <div className="min-h-screen bg-[#060b19] text-[#e9efff]">
@@ -112,7 +113,7 @@ export default function HomePage() {
       <aside className="reveal reveal-1 fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-white/10 bg-white/3 p-5 backdrop-blur-2xl lg:flex lg:flex-col">
         <div className="mb-7">
           <h1 className="text-2xl font-semibold tracking-tight text-[#b7f7d8]">
-            CampusBistro
+            Unytick-web
           </h1>
           <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/45">
             Panel Operativo
@@ -160,8 +161,11 @@ export default function HomePage() {
           <button className="w-full rounded-lg px-3 py-2 text-left transition hover:bg-white/5">
             Soporte
           </button>
-         
-          <Link href="/" className="w-full rounded-lg px-3 py-2 text-left text-[#ffc4c4] transition hover:bg-white/5" >
+
+          <Link
+            href="/"
+            className="w-full rounded-lg px-3 py-2 text-left text-[#ffc4c4] transition hover:bg-white/5"
+          >
             Cerrar sesion
           </Link>
         </div>
@@ -210,12 +214,16 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={()=>{
-              signOut()
-              redirect("/")
-            }} className="hidden rounded-full border border-white/14 bg-white/5 px-3 py-1 text-xs font-medium text-[#d7f8e8] sm:inline-block">
-              Sesion activa {session?.user?.name || "Usuario"}
+            <button
+              onClick={() => {
+                signOut();
+                router.replace("/")
+              }}
+              className="hidden rounded-full border cursor-pointer  sm:inline-block bg-red-500/10 border-red-500/65 px-4 py-2 text-sm font-medium  text-white transition hover:bg-red-500/25 hover:border-red-500/85"
+            >
+              cerrar Sesion activa
             </button>
+
             <div className="size-9 rounded-full border border-white/20 bg-linear-to-br from-[#6ea5dc]/55 to-[#7de0af]/40 backdrop-blur" />
           </div>
         </header>
@@ -226,7 +234,10 @@ export default function HomePage() {
           </p>
 
           <h1 className="reveal reveal-4 mt-3 text-4xl font-semibold leading-tight text-[#edf3ff] md:text-5xl">
-            Bienvenido, <span className="text-[#9ce9c7]">Operador</span>
+            Bienvenido,{" "}
+            <span className="text-[#9ce9c7]">
+              {session?.user?.name || "Usuario"}
+            </span>
           </h1>
           <p className="reveal reveal-5 mt-2 max-w-2xl text-base text-white/67">
             La cocina esta en marcha y los tickets listos para ser atendidos.

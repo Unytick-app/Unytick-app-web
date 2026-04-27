@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ModalLogin from "@/components/ModalLogin";
-import { createUserAction, loginAction } from "@/actions/login.action";
-import { createUser } from "@/services/auth.service";
+import { loginAction } from "@/actions/login.action";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -14,35 +13,26 @@ export default function LoginForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [authError, setAuthError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLoginAction = (formData: FormData) => {
+    
     setAuthError("");
     setIsLoading(true);
+     loginAction(formData).then((result) => {
+        if (!result.ok) {
+          setAuthError(
+            result.error ?? "No fue posible iniciar sesion. Intente nuevamente.",
+          );
+          setIsLoading(false);
+          return;
+        }
+  
+        router.replace("/home");
 
-    try {
-      const response = await fetch("https://dummyjson.com/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          password,
-          expiresInMins: 30,
-        }),
+      }).catch(()=>{
+        setAuthError("No fue posible iniciar sesion. Intente nuevamente.");
+        setIsLoading(false);
       });
-
-      if (!response.ok) {
-        setAuthError("Credenciales invalidas. Verifique su usuario y clave.");
-        return;
-      }
-
-      await response.json();
-      router.replace("/home");
-    } catch (error) {
-      console.error("Error de autenticacion", error);
-      setAuthError("No fue posible iniciar sesion. Intente nuevamente.");
-    } finally {
-      setIsLoading(false);
-    }
+    
   };
 
   return (
@@ -68,7 +58,7 @@ export default function LoginForm() {
         </div>
 
         {/* Form */}
-        <form action={loginAction} className="space-y-6">
+        <form action={handleLoginAction} className="space-y-6">
           {/* Email/Usuario */}
           <div>
             <label className="block text-xs font-semibold text-white/70 mb-3 tracking-wider">

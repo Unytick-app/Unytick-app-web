@@ -1,31 +1,39 @@
 
-
-import { createUser, loginUser } from "@/services/auth.service";
+import { createUser } from "@/services/auth.service";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { Router } from "next/router";
 
-export async function loginAction(formData: FormData) {
+type LoginActionResult = {
+    ok: boolean;
+    error?: string;
+};
+
+export async function loginAction(formData: FormData): Promise<LoginActionResult> {
     const correo = formData.get("correo") as string;
     const clave = formData.get("clave") as string;
-    
-    console.log(`Correo: ${correo}, Clave: ${clave}`);
 
-     const res = await signIn("credentials",{
-        correo,
-        clave,
-        redirect: false,
-        
-    })
-    if(!res?.ok){
-      console.log("hubo algun error "+res);
+    try {
+        const res = await signIn("credentials", {
+            correo,
+            clave,
+            redirect: false,
+        });
+
+        if (!res?.ok) {
+            return {
+                ok: false,
+                error: "Credenciales invalidas. Verifique su usuario y clave.",
+            };
     }
-    console.log("Respuesta de signIn:", res);
-    redirect("/home");
 
-      
+        return { ok: true };
+    } catch {
+        return {
+            ok: false,
+            error: "No fue posible iniciar sesion. Intente nuevamente.",
+        };
+    }
 }
+
 export async function createUserAction() {
-    // Implementar logica para crear un nuevo usuario
     await createUser();
 }

@@ -54,6 +54,7 @@ export async function loginUser({
 export async function createUser() {
   // Implementar logica para crear un nuevo usuario
   const apiUrl = process.env.API_URL;
+  console.log("API_URL:", apiUrl);
 
   if (!apiUrl) {
     console.error("API_URL no esta definida en variables de entorno.");
@@ -63,15 +64,15 @@ export async function createUser() {
   const normalizedApiUrl = apiUrl.endsWith("/") ? apiUrl : `${apiUrl}/`;
   try {
     const response = await axios.post(
-      `${normalizedApiUrl}auth/register`,
+      `${normalizedApiUrl}auth/register/operario`,
       {
-        correo: "jp3563454@gamil.com",
+        correo: "jp3563454@prueba.com",
         clave: "12345678",
-        codigo_estudiantil: "1064982685",
+        comedor:"Cafeteria Central",
         nombre: "Jose",
         apellido: "Padilla",
         programa: "Ingenieria de Sistemas",
-        cedula: "1064982685",
+        cedula: "6666666",
       },
       {
         headers: {

@@ -1,7 +1,9 @@
-import { loginUser } from "@/services/auth.service";
+import { createUser, loginUser } from "@/services/auth.service";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { LoginApiPayload, LoginApiPayloadError } from "@/types/auth-api";
+import { jwtDecode } from "jwt-decode";
+
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -40,7 +42,14 @@ export const authOptions: AuthOptions = {
 
         const payload = res.data as LoginApiPayload;
 
-        console.log("Respuesta exitosa del servidor:", payload);
+        const decoded = jwtDecode<Record<string, unknown>>(payload.token);
+        if(decoded.rol !== "operario"){
+          console.log("SU ROL:", decoded.rol);
+          console.log("Acceso denegado: Usuario no es operario.");
+          
+          return null;
+        }
+
         console.log("Respuesta exitosa status:", res.status);
 
         return {
@@ -58,13 +67,19 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        /* console.log("JWT callback - OBJETO USUARIO:", user); */
-        token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
-        token.cedula = user.cedula;
-        token.tipo = user.tipo;
-        token.accessToken = user.token;
+        // El token JWT del backend se encuentra en user.accessToken o user.token asi que lo decodificamos para extraer claims personalizados y los agregamos al token de NextAuth
+        const decoded = jwtDecode<Record<string, unknown>>(user.token);
+
+        return {
+          ...token, // mantiene propiedades internas de NextAuth
+          ...decoded, // agrega/reemplaza claims del JWT backend
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          cedula: user.cedula,
+          tipo: user.tipo,
+          accessToken: user.token,
+        };
       }
 
       return token;

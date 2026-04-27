@@ -8,13 +8,13 @@ type ModalLoginProps = {
 };
 
 export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
-  if (!isOpen || typeof document === "undefined") {
+  if (typeof document === "undefined") {
     return null;
   }
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-9999 flex items-center justify-center p-4 transition-all duration-300 ease-out ${
+      className={`fixed inset-0 z-9999 flex items-center justify-center p-4 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
       role="dialog"
@@ -24,16 +24,16 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
       onClick={onClose}
     >
       <div
-        className={`absolute inset-0 bg-black/60 backdrop-blur-[3px] transition-all duration-300 ease-out ${
+        className={`absolute inset-0 bg-black/60 backdrop-blur-[3px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isOpen ? "opacity-100" : "opacity-0 backdrop-blur-0"
         }`}
       />
 
       <div
-        className={`relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/25 bg-linear-to-b from-white/[0.14] via-white/9 to-white/6 p-7 shadow-[0_24px_70px_-20px_rgba(0,0,0,0.7)] backdrop-blur-2xl transition-all duration-300 ease-out ${
+        className={`relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/25 bg-linear-to-b from-white/[0.14] via-white/9 to-white/6 p-7 shadow-[0_24px_70px_-20px_rgba(0,0,0,0.7)] backdrop-blur-2xl will-change-transform transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isOpen
             ? "translate-y-0 scale-100 opacity-100"
-            : "translate-y-3 scale-[0.97] opacity-0"
+            : "translate-y-4 scale-[0.96] opacity-0"
         }`}
         onClick={(event) => event.stopPropagation()}
       >
@@ -44,7 +44,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
           <div className="mb-5 flex items-start justify-between gap-3">
             <h3
               id="account-request-title"
-              className="text-2xl font-semibold bg-gradient-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent"
+              className="text-2xl font-semibold bg-linear-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent"
             >
               Solicitud de Cuenta Operativa
             </h3>
