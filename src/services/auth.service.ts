@@ -66,13 +66,13 @@ export async function createUser() {
     const response = await axios.post(
       `${normalizedApiUrl}auth/register/operario`,
       {
-        correo: "jp3563454@prueba.com",
+        correo: "jose@gmail.com",
         clave: "12345678",
-        comedor:"Cafeteria Central",
+        comedor:"Cafeteria Enfermeria",
         nombre: "Jose",
         apellido: "Padilla",
         programa: "Ingenieria de Sistemas",
-        cedula: "6666666",
+        cedula: "67676767",
       },
       {
         headers: {

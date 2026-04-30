@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ModalLogin from "@/components/ModalLogin";
-import { loginAction } from "@/actions/login.action";
+import { createUserAction, loginAction } from "@/actions/login.action";
 
 export default function LoginForm() {
   const router = useRouter();

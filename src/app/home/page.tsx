@@ -1,8 +1,7 @@
 "use client";
-import { createUser } from "@/services/auth.service";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const actividadReciente = [
   {
@@ -122,7 +121,7 @@ export default function HomePage() {
 
         <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
           <p className="text-sm font-medium text-[#ecf4ff]">
-            Comedor Principal
+            {session?.user?.comedor || "Comedor No asignado"}
           </p>
           <p className="mt-1 text-xs text-white/55">Sesion activa</p>
         </div>
@@ -166,7 +165,10 @@ export default function HomePage() {
             href="/"
             className="w-full rounded-lg px-3 py-2 text-left text-[#ffc4c4] transition hover:bg-white/5"
           >
+            
+
             Cerrar sesion
+            
           </Link>
         </div>
       </aside>
@@ -242,6 +244,30 @@ export default function HomePage() {
           <p className="reveal reveal-5 mt-2 max-w-2xl text-base text-white/67">
             La cocina esta en marcha y los tickets listos para ser atendidos.
           </p>
+
+          <article className="reveal reveal-5 mt-5 rounded-2xl border border-[#9be7c9]/22 bg-white/4 px-4 py-3 backdrop-blur-xl sm:max-w-xl">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-[#bde9d2]">
+              Identificacion operativa
+            </p>
+            <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="rounded-xl border border-white/12 bg-black/18 px-3 py-2">
+                <p className="text-[10px] uppercase tracking-wide text-white/48">
+                  ID del operador
+                </p>
+                <p className="mt-1 font-mono text-sm text-[#e9fff3]">
+                  {session?.user?.id ?? "No disponible"}
+                </p>
+              </div>
+              <div className="rounded-xl border border-white/12 bg-black/18 px-3 py-2">
+                <p className="text-[10px] uppercase tracking-wide text-white/48">
+                  ID del usuario
+                </p>
+                <p className="mt-1 font-mono text-sm text-[#e9fff3]">
+                  {session?.user?.cedula ?? "No disponible"}
+                </p>
+              </div>
+            </div>
+          </article>
 
           <div className="mt-8 grid grid-cols-1 gap-4 xl:grid-cols-3">
             <article className="reveal reveal-6 group rounded-3xl border border-white/12 bg-white/4.5 p-6 backdrop-blur-2xl transition duration-300 hover:bg-white/6 xl:col-span-2">

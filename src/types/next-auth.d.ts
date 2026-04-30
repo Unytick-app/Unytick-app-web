@@ -12,6 +12,7 @@ declare module "next-auth" {
       accessToken: string
       id: string
       name: string
+      comedor: string
     }
   }
   interface User {
@@ -21,6 +22,7 @@ declare module "next-auth" {
     id: string
     name: string
     token: string
+    
   }
   interface JWT {
     cedula: string
@@ -28,5 +30,6 @@ declare module "next-auth" {
     accessToken: string
     id: string
     name: string
+    comedor: string
   }
 }

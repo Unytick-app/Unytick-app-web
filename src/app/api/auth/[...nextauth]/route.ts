@@ -51,6 +51,7 @@ export const authOptions: AuthOptions = {
         }
 
         console.log("Respuesta exitosa status:", res.status);
+        
 
         return {
           id: String(payload.usuario.id ?? correo),
@@ -69,6 +70,8 @@ export const authOptions: AuthOptions = {
       if (user) {
         // El token JWT del backend se encuentra en user.accessToken o user.token asi que lo decodificamos para extraer claims personalizados y los agregamos al token de NextAuth
         const decoded = jwtDecode<Record<string, unknown>>(user.token);
+       /*  console.log("JWT callback - esto es lo que trae el token de la API:", decoded); */
+
 
         return {
           ...token, // mantiene propiedades internas de NextAuth
@@ -85,13 +88,14 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      /* console.log("Session callback - ObJETO TOKEN:", token); */
+      console.log("Session callback - ObJETO TOKEN guardado en las cookies:", token);
 
       if (token) {
         session.user.id = token.id as string;
         session.user.cedula = token.cedula as string;
         session.user.tipo = token.tipo as string;
         session.user.accessToken = token.accessToken as string;
+        session.user.comedor = token.comedor as string;
         /* console.log("Session callback - ObJETO SESSION:", session); */
       }
 
