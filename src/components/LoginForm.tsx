@@ -17,18 +17,18 @@ export default function LoginForm() {
     
     setAuthError("");
     setIsLoading(true);
-     loginAction(formData).then((result) => {
-        if (!result.ok) {
-          setAuthError(
-            result.error ?? "No fue posible iniciar sesion. Intente nuevamente.",
-          );
-          setIsLoading(false);
-          return;
-        }
-  
-        router.replace("/home");
-
-      }).catch(()=>{
+        loginAction(formData).then((result) => {
+          if (!result.ok) {
+            setAuthError(
+              result.error ?? "No fue posible iniciar sesion. Intente nuevamente."
+            );
+            setIsLoading(false);
+            return;
+          }
+          
+          router.refresh();
+          router.replace("/home");
+        }).catch(()=>{
         setAuthError("No fue posible iniciar sesion. Intente nuevamente.");
         setIsLoading(false);
       });
