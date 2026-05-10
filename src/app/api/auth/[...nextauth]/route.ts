@@ -88,7 +88,7 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("Session callback - ObJETO TOKEN guardado en las cookies:", token);
+      /* console.log("Session callback - ObJETO TOKEN guardado en las cookies:", token); */
 
       if (token) {
         session.user.id = token.id as string;
