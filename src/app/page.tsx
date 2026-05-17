@@ -1,8 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 import LoginForm from "@/components/LoginForm";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/home");
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Fondo */}
@@ -16,7 +25,7 @@ export default function Home() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-[rgba(11,19,38,0.95)] backdrop-blur-[2px]" />
 
-      <section className="flex justify-between px-6 py-4 z-20 backdrop-blur-[1px] bg-gradient-to-b from-black/20 via-black/5 via-90% to-transparent">
+      <section className="flex justify-between px-6 py-4 z-20 backdrop-blur-[1px] bg-linear-to-b from-black/20 via-black/5 via-90% to-transparent">
         {/* Header */}
         <div className=" flex items-center gap-4">
           <svg
@@ -30,7 +39,7 @@ export default function Home() {
             <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
           </svg>
 
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-linear-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent">
             Unytick
           </h1>
         </div>
@@ -51,7 +60,7 @@ export default function Home() {
       <div className="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-6">
         <section className="rounded-2xl backdrop-blur-md border border-white/20 shadow-2xl flex w-full max-w-5xl mx-auto overflow-hidden">
           {/* Left Side - Branding */}
-          <div className="w-1/2 bg-gradient-to-b from-white/10 to-white/5 rounded-l-2xl p-12 flex flex-col justify-between">
+          <div className="w-1/2 bg-linear-to-b from-white/10 to-white/5 rounded-l-2xl p-12 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4  px-2 py-1 rounded-2xl w-45  justify-center bg-[rgba(5,108,75,0.2)]">
                 <p className="text-xs font-semibold text-[#7ECDA7] tracking-widest  ">
@@ -62,7 +71,7 @@ export default function Home() {
               <h2 className="text-4xl font-bold leading-tight">
                 <span className="text-[#D9E1FC]">Gestión Institucional</span>
                 <br />
-                <span className="bg-gradient-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent">Eficaz y Segura.</span>
+                <span className="bg-linear-to-r from-[#7ECDA7] to-[#036A49] bg-clip-text text-transparent">Eficaz y Segura.</span>
               </h2>
               <p className="text-white/60 text-sm mt-6 leading-relaxed">
                 Acceda al panel operarios de Unytick para la Universidad de
@@ -73,7 +82,7 @@ export default function Home() {
             {/* Features */}
             <div className="space-y-5">
               <div className="flex items-start gap-4 ">
-                <div className="flex-shrink-0 mt-1">
+                <div className="shrink-0 mt-1">
                   <div className="flex items-center justify-center p-1 rounded-full bg-[#7ECDA7]/20 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +109,7 @@ export default function Home() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
+                <div className="shrink-0 mt-1">
                   <div className="flex items-center justify-center p-1 rounded-full bg-[#7ECDA7]/20 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +143,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="backdrop-blur-[1px] text-center py-6 px-15 text-xs text-white/30 z-20 border-t border-white/5 flex justify-between bg-gradient-to-t from-black/80 via-black/20 via-90% to-transparent">
+      <footer className="backdrop-blur-[1px] text-center py-6 px-15 text-xs text-white/30 z-20 border-t border-white/5 flex justify-between bg-linear-to-t from-black/80 via-black/20 via-90% to-transparent">
         <section>
           <p>© 2026 Unytick University. All rights reserved.</p>
         </section>
