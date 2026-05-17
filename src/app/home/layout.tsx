@@ -1,5 +1,6 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -85,8 +86,15 @@ export default function HomeLayout({
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(140,183,255,0.18),transparent_35%),radial-gradient(circle_at_90%_20%,rgba(144,255,216,0.12),transparent_32%),radial-gradient(circle_at_70%_80%,rgba(140,183,255,0.12),transparent_36%),linear-gradient(180deg,#040811_0%,#060b19_48%,#050912_100%)]" />
       <div className="grid-drift pointer-events-none fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[46px_46px] opacity-35" />
 
-      <aside className="reveal reveal-1 fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-white/10 bg-white/3 p-5 backdrop-blur-2xl lg:flex lg:flex-col">
+      <aside className="reveal reveal-1 fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-white/10 bg-white/3 p-5 backdrop-blur-2xl lg:flex lg:flex-col ">
         <div className="mb-7">
+          <Image
+              src="/iconUnytick.png"
+              alt="Unytick Logo"
+              width={62}
+              height={62}
+              className="size-15 absolute -translate-y-2 translate-x-[250%] rounded-full bg-gradient-to-br from-white/10 to-transparent border border-white/10 text-white  shadow-sm shrink-0 drop-shadow-[0_0_2px_rgba(156,233,199,0.8)]"
+            />
           <h1 className="text-2xl font-semibold tracking-tight text-[#b7f7d8]">
             Unytick-web
           </h1>
