@@ -93,7 +93,7 @@ export default function HomeLayout({
               alt="Unytick Logo"
               width={62}
               height={62}
-              className="size-15 absolute -translate-y-2 translate-x-[250%] rounded-full bg-gradient-to-br from-white/10 to-transparent border border-white/10 text-white  shadow-sm shrink-0 drop-shadow-[0_0_2px_rgba(156,233,199,0.8)]"
+              className="size-45 absolute -translate-y-14 translate-x-12 opacity-25 "
             />
           <h1 className="text-2xl font-semibold tracking-tight text-[#b7f7d8]">
             Unytick-web
