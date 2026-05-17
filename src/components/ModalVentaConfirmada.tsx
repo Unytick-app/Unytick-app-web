@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -23,13 +23,7 @@ export default function ModalVentaConfirmada({
   idTransaccion,
   ticketId,
 }: ModalVentaConfirmadaProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!isOpen || !mounted) return null;
+  if (!isOpen) return null;
 
   const modalContent = (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
