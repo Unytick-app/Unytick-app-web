@@ -1,15 +1,18 @@
 export type LoginApiUser = {
-  id: string;
-  correo: string;
+  id: number;
+  email: string;
   cedula: string;
-  tipo: string;
-  nombre: string;
+  role: string;
+  name: string;
 };
 
 export type LoginApiPayload = {
   message: string;
-  usuario: LoginApiUser;
-  token: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    user: LoginApiUser;
+  };
 };
 
 export type LoginApiPayloadError = {

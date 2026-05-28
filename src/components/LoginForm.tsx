@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import ModalLogin from "@/components/ModalLogin";
-import { createUserAction, loginAction } from "@/actions/login.action";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -13,41 +13,36 @@ export default function LoginForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [authError, setAuthError] = useState("");
 
-  const handleLoginAction = (formData: FormData) => {
-    
+  const handleLoginAction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setAuthError("");
     setIsLoading(true);
-        loginAction(formData).then((result) => {
-          if (!result.ok) {
-            setAuthError(
-              result.error ?? "No fue posible iniciar sesion. Intente nuevamente."
-            );
-            setIsLoading(false);
-            return;
-          }
-          
-          router.refresh();
-          router.replace("/home");
-        }).catch(()=>{
-        setAuthError("No fue posible iniciar sesion. Intente nuevamente.");
-        setIsLoading(false);
+
+    try {
+      const result = await signIn("credentials", {
+        document_number: username,
+        password: password,
+        redirect: false,
       });
-    
+
+      if (!result || !result.ok) {
+        setAuthError(result?.error ?? "No fue posible iniciar sesion. Intente nuevamente.");
+        setIsLoading(false);
+        return;
+      }
+      
+      router.refresh();
+      router.replace("/home");
+    } catch {
+      setAuthError("No fue posible iniciar sesion. Intente nuevamente.");
+      setIsLoading(false);
+    }
   };
 
   return (
     <>
       <div className="w-1/2 bg-linear-to-b from-white/5 to-white/2 rounded-r-2xl p-10 flex flex-col justify-center">
         {/* Header */}
-        {/* <form action={createUserAction}>
-
-        <button
-          type="submit"
-          className="text-[#7ECDA7] hover:text-[#1f8856] transition mb-4"
-        >
-          crear cuenta
-        </button>
-        </form> */}
         <div className="mb-10">
           <h2 className="text-2xl font-semibold text-white mb-2">
             Inicio de Sesión
@@ -58,7 +53,7 @@ export default function LoginForm() {
         </div>
 
         {/* Form */}
-        <form action={handleLoginAction} className="space-y-6">
+        <form onSubmit={handleLoginAction} className="space-y-6">
           {/* Email/Usuario */}
           <div>
             <label className="block text-xs font-semibold text-white/70 mb-3 tracking-wider">
@@ -68,8 +63,8 @@ export default function LoginForm() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              name="correo"
-              placeholder="usuario"
+              name="document_number"
+              placeholder="documento"
               className="w-full bg-black/25 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#7ECDA7] focus:bg-white/10 transition"
               required
             />
@@ -84,7 +79,7 @@ export default function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              name="clave"
+              name="password"
               placeholder="••••••••••"
               className="w-full bg-black/25 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#7ECDA7] focus:bg-white/10 transition"
               required

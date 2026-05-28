@@ -3,15 +3,15 @@ import type { AxiosResponse } from "axios";
 import type { LoginApiResponse } from "@/types/auth-api";
 
 interface LoginProps {
-  correo: string;
-  clave: string;
+  document_number: string;
+  password: string;
 }
 
 export async function loginUser({
-  correo,
-  clave,
+  document_number,
+  password,
 }: LoginProps): Promise<AxiosResponse<LoginApiResponse> | null> {
-  const apiUrl = process.env.API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
 
   if (!apiUrl) {
     console.error("API_URL no esta definida en variables de entorno.");
@@ -24,8 +24,8 @@ export async function loginUser({
     const response = await axios.post<LoginApiResponse>(
       `${normalizedApiUrl}auth/login`,
       {
-        correo,
-        clave,
+        document_number,
+        password,
       },
       {
         headers: {
@@ -53,7 +53,7 @@ export async function loginUser({
 
 export async function createUser() {
   // Implementar logica para crear un nuevo usuario
-  const apiUrl = process.env.API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
   console.log("API_URL:", apiUrl);
 
   if (!apiUrl) {
