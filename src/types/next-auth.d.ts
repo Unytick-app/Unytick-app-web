@@ -8,28 +8,33 @@ declare module "next-auth" {
     user: {
       /** The user's postal address. */
       cedula: string
-      tipo: string
+      comedor?: string
+      role: string
       accessToken: string
       id: string
       name: string
-      comedor: string
+      email: string
     }
+    refreshToken?: string
   }
   interface User {
     cedula: string
-    tipo: string
+    comedor?: string
+    role: string
     accessToken: string
+    refreshToken: string
     id: string
     name: string
-    token: string
-    
+    email: string
   }
   interface JWT {
     cedula: string
-    tipo: string
+    comedor?: string
+    role: string
     accessToken: string
+    refreshToken: string
     id: string
     name: string
-    comedor: string
+    email: string
   }
 }
